@@ -11,44 +11,68 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.bookreview.entity.Book;
 import com.example.bookreview.form.BookForm;
+import com.example.bookreview.servise.BookServise;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/books")
+@RequiredArgsConstructor
 public class BookController {
 	
+	private final BookServise bookServise;
+	
+	/**
+	 * 書籍一覧を表示する
+	 */
 	@GetMapping
-	public String showlist(Model model) {
+	public String index(Model model) {
 		
-		//一覧を表示するためのテスト
-		Book book=new Book();
+		//model.addAttribute("books",bookServise.findAll());
 		
+		//一覧を表示するためのテスト		
 		ArrayList<Book> books=new ArrayList<>();
-				
-
+		books.add(new Book());
+			
+		
 		model.addAttribute("book",books);
-		
-		
+	
 		return "books/list";
 	}
 	
-	
-	@GetMapping("/new")
-	public String showCreateForm(Model model) {
-		model.addAttribute("bookForm",new BookForm());
-		return "books/create";
-	}
-	
-	@PostMapping
-	public String create(@ModelAttribute BookForm bookform) {
-		
-		//todo DB登録、確認画面
-		return "/books";
-	}
-	
+	/**
+	 * 書籍詳細とレビュー一覧を表示する
+	 * @param id 書籍ID
+	 */
 	@GetMapping("/{id}")
-	public String showEditForm() {
+	public String show(Long id,Model model) {
 		
-		return "books/edit";
+		// @PathVariableはURL内の{id}を取得するための注釈
+		
+		return "books/show";
 	}
-
+	
+	/**
+	 * 新規登録画面を表示する
+	 */
+	@GetMapping("/register")
+	public String create(@ModelAttribute BookForm bookForm) {
+		
+		// @ModelAttributeはFormオブジェクトをViewに渡すための注釈
+		
+		return "books/register";
+	}
+	
+	/**
+	 * 書籍を保存する
+	 */
+	@PostMapping("/register")
+	public String store(@ModelAttribute BookForm bookForm) {
+		
+		// @Validatedは入力チェック（バリデーション）を実行する注釈
+        // if (result.hasErrors()) return "books/register";
+        // bookService.save(bookForm);
+		
+		return "redirect::/books";
+	}
 }
