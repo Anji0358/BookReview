@@ -1,7 +1,5 @@
 package com.example.bookreview.entity;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,18 +9,15 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Book {
-	
+public class Review {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private String title;
-	private String author;
-	private String isbn;
-	private String description;
-	private LocalDateTime created_at;
-	private LocalDateTime updated_at;
-	
+
+	private Book book;
+	private String reviewerName;
+	private Integer rating;
+	private String comment;
 	
 }

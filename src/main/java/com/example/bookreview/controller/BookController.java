@@ -1,6 +1,5 @@
 package com.example.bookreview.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
@@ -21,14 +20,7 @@ public class BookController {
 	public String showlist(Model model) {
 		
 		//一覧を表示するためのテスト
-		Book book=new Book(
-				"1",
-				"no title",
-				"unknown",
-				Integer.valueOf(1),
-				"面白い",
-				Date.valueOf("2023-10-01")
-				);
+		Book book=new Book();
 		
 		ArrayList<Book> books=new ArrayList<>();
 				
