@@ -21,8 +21,8 @@ public class Book {
 	private String author;
 	private String isbn;
 	private String description;
-	private LocalDateTime created_at;
-	private LocalDateTime updated_at;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 	
 	
 }

@@ -1,5 +1,7 @@
 package com.example.bookreview.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,5 +21,6 @@ public class Review {
 	private String reviewerName;
 	private Integer rating;
 	private String comment;
-	
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 }
