@@ -50,7 +50,7 @@ public class BookController {
         
         model.addAttribute("book", book);
 		
-		return "books/show";
+		return "books/detail";
 	}
 	
 	
