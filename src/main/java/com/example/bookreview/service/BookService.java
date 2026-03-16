@@ -2,7 +2,6 @@ package com.example.bookreview.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,14 +29,13 @@ public class BookService {
 		bookRepository.findAll().forEach(allBooks::add);;
 		return allBooks;
 	}
-	
 
 	/**
      * IDを指定して書籍を1件取得します。
      * 見つからない場合は null を返すか、例外を投げます。
      */
-	public Optional<Book> findById(Long id) {
-		return bookRepository.findById(id);
+	public Book findById(Long id) {
+		return bookRepository.findById(id).orElse(null);
 	}
 	
 	/**
