@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>取得した本一覧</title>
+</head>
+<body>
+	<h2>取得した本一覧</h2>
+	
+	<div th:each="book:${books}">
+		<p th:text="${book.id}"></p>
+	</div>
+	
+	
+</body>
+</html>

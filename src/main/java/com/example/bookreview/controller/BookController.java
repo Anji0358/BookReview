@@ -6,12 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.bookreview.entity.Book;
 import com.example.bookreview.form.BookForm;
-import com.example.bookreview.servise.BookServise;
+import com.example.bookreview.service.BookService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BookController {
 	
-	private final BookServise bookServise;
+	private final BookService bookService;
 	
 	/**
 	 * 書籍一覧を表示する
@@ -32,12 +33,28 @@ public class BookController {
 		
 		//一覧を表示するためのテスト		
 		ArrayList<Book> books=new ArrayList<>();
-		books.add(new Book());
-			
 		
-		model.addAttribute("book",books);
+		Book b1=new Book();
+		Book b2=new Book();
+		Book b3=new Book();
+		Book b4=new Book();
+		Book b5=new Book();
+		
+		b1.setId(1L);
+		b2.setId(2L);
+		b3.setId(3L);
+		b4.setId(4L);
+		b5.setId(5L);
+		
+		books.add(b1);
+		books.add(b2);
+		books.add(b3);
+		books.add(b4);
+		books.add(b5);
+		
+		model.addAttribute("books",books);
 	
-		return "books/list";
+		return "books/index";
 	}
 	
 	/**
@@ -45,7 +62,7 @@ public class BookController {
 	 * @param id 書籍ID
 	 */
 	@GetMapping("/{id}")
-	public String show(Long id,Model model) {
+	public String show(@PathVariable("id") Long id,Model model) {
 		
 		// @PathVariableはURL内の{id}を取得するための注釈
 		
@@ -73,6 +90,6 @@ public class BookController {
         // if (result.hasErrors()) return "books/register";
         // bookService.save(bookForm);
 		
-		return "redirect::/books";
+		return "redirect:/books";
 	}
 }
