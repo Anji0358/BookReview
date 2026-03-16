@@ -1,16 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>取得した本一覧</title>
+	<meta charset="UTF-8">
+	<title>書籍一覧 - Book Review App</title>
 </head>
+
 <body>
-	<h2>取得した本一覧</h2>
-	
-	<div th:each="book:${books}">
-		<p th:text="${book.id}"></p>
+
+	<header>
+		<h1>Book Review App</h1>
+		<nav>
+			<a th:href="@{/books/register}">新規登録</a>
+		</nav>
+	</header>
+
+	<hr>
+	<div th:if="${successMessage}">
+		<p style="color: green;" th:text="${successMessage}"></p>
 	</div>
-	
-	
+
+	<main>
+		<h2>登録されている本の一覧</h2>
+
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>タイトル</th>
+					<th>著者</th>
+					<th>ISBN</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="book : ${books}">
+					<td th:text="${book.id}">1</td>
+					<td th:text="${book.title}">タイトルが入ります</td>
+					<td th:text="${book.author}">著者が入ります</td>
+					<td th:text="${book.isbn}">ISBNが入ります</td>
+					<td>
+						<a th:href="@{/books/{id}(id=${book.id})}">詳細</a>
+						<a th:href="@{/books/{id}/edit(id=${book.id})}">編集</a>
+					</td>
+				</tr>
+
+				<tr th:if="${#lists.isEmpty(books)}">
+					<td colspan="5">本が1冊もありません。</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+
+
 </body>
+
 </html>
