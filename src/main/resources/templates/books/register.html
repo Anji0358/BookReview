@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>レビュー登録</title>
+    <meta charset="UTF-8">
+    <title>書籍登録</title>
 </head>
 <body>
-	<h2>レビュー登録</h2>
-	
-	<form th:acton="@{/books/create}"method="POST"th:object="${bookForm}">
-		【book id】<br>
-		<input type="text" th:field="*{id}">
-		<br>
-		【book title】<br>
-		<input type="text" th:field="*{title}">
-		<br>
-		【author】<br>
-		<input type="text" th:field="*{author}">
-		<br>
-		【評価】<br>
-		<input type="text" th:field="*{rating}">
-		<br>
-		【コメント】<br>
-		<input type="text" th:field="*{comment}">
-		<br>
-		【読んだ日付】<br>
-		<input type="date" th:field="*{readDate}">
-		<br>
-		<input type="submit" value="登録">
-	</form>
-		
+
+    <header>
+        <h1>新しい書籍の登録</h1>
+        <nav>
+            <a th:href="@{/books}">← 一覧に戻る</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <form th:action="@{/books/register}" th:object="${bookForm}" method="post">
+            
+            <div>
+                <label for="title">タイトル:</label><br>
+                <input type="text" id="title" th:field="*{title}" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="author">著者:</label><br>
+                <input type="text" id="author" th:field="*{author}" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="isbn">ISBN:</label><br>
+                <input type="text" id="isbn" th:field="*{isbn}">
+            </div>
+
+            <br>
+
+            <div>
+                <label for="description">内容紹介:</label><br>
+                <textarea id="description" th:field="*{description}" rows="5" cols="40"></textarea>
+            </div>
+
+            <br>
+
+            <div>
+                <button type="submit">登録する</button>
+                <button type="reset">リセット</button>
+            </div>
+
+        </form>
+    </main>
 
 </body>
 </html>
