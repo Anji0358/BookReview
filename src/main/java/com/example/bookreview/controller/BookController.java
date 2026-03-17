@@ -82,4 +82,55 @@ public class BookController {
         redirectAttributes.addFlashAttribute("successMessage", "書籍を登録しました");
 		return "redirect:/books";
 	}
+
+	/**
+     * 編集画面を表示する
+     */
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        // 1. IDを元に、現在DBに保存されている本の情報を取得する
+        Book book = bookService.findById(id);
+        
+        // 2. 本が見つからない場合は一覧へリダイレクト（安全策）
+        if (book == null) {
+            return "redirect:/books";
+        }
+
+        // 3. Entityの値をFormクラスに詰め替える（画面の入力欄に現在の値を表示するため）
+        BookForm bookForm = new BookForm();
+        bookForm.setTitle(book.getTitle());
+        bookForm.setAuthor(book.getAuthor());
+        bookForm.setIsbn(book.getIsbn());
+        bookForm.setDescription(book.getDescription());
+
+        // 4. FormオブジェクトとIDをModelに渡す
+        model.addAttribute("bookForm", bookForm);
+        model.addAttribute("id", id); 
+
+        return "books/edit";
+    }
+
+    /**
+     * 書籍情報を更新する
+     */
+    @PostMapping("/{id}/edit")
+    public String update(@PathVariable("id") Long id, @ModelAttribute BookForm bookForm, RedirectAttributes redirectAttributes) {
+        // 1. 既存のデータを取得
+        Book book = bookService.findById(id);
+        
+        // 2. 画面から送られてきたFormの値で、Entityを上書きする
+        book.setTitle(bookForm.getTitle());
+        book.setAuthor(bookForm.getAuthor());
+        book.setIsbn(bookForm.getIsbn());
+        book.setDescription(bookForm.getDescription());
+
+        // 3. 保存を実行（IDがセットされているので、JPAが自動的にUPDATE文を発行します）
+        bookService.save(book);
+
+        // 4. 完了メッセージを設定
+        redirectAttributes.addFlashAttribute("successMessage", "書籍情報を更新しました");
+
+        // 5. 更新した本の詳細画面へリダイレクト
+        return "redirect:/books/" + id;
+    }
 }

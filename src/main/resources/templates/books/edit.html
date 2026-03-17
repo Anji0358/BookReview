@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>書籍登録</title>
+    <meta charset="UTF-8">
+    <title>書籍編集</title>
 </head>
-
 <body>
 
-	<header>
-		<h1>新しい書籍の登録</h1>
-		<nav>
-			<a th:href="@{/books}">一覧に戻る</a>
-		</nav>
-	</header>
+    <header>
+        <h1>書籍の編集</h1>
+        <nav>
+            <a th:href="@{/books/{id}(id=${id})}">詳細に戻る</a>
+        </nav>
+    </header>
 
-	<hr>
+    <hr>
 
-	<main>
-		<form th:action="@{/books/register}" th:object="${bookForm}" method="post"">
-			
-			<div>
-				<label for=" title">タイトル</label><br>
-			<input type="text" id="title" th:field="*{titel}" required>
-			</div>
+    <main>
+        <form th:action="@{/books/{id}/edit(id=${id})}" th:object="${bookForm}" method="post">
+            
+            <div>
+                <label for="title">タイトル:</label><br>
+                <input type="text" id="title" th:field="*{title}" required>
+            </div>
 
-			<br>
+            <br>
 
-			<div>
-				<label for="author">著者:</label><br>
-				<input type="text" id="author" th:field="*{author}" required>
-			</div>
+            <div>
+                <label for="author">著者:</label><br>
+                <input type="text" id="author" th:field="*{author}" required>
+            </div>
 
-			<br>
+            <br>
 
-			<div>
-				<label for="isbn">ISBN:</label><br>
-				<input type="text" id="isbn" th:field="*{isbn}">
-			</div>
+            <div>
+                <label for="isbn">ISBN:</label><br>
+                <input type="text" id="isbn" th:field="*{isbn}">
+            </div>
 
-			<br>
+            <br>
 
-			<div>
-				<label for="description">内容紹介:</label><br>
-				<textarea id="description" th:field="*{description}" rows="5" cols="40"></textarea>
-			</div>
+            <div>
+                <label for="description">内容紹介:</label><br>
+                <textarea id="description" th:field="*{description}" rows="5" cols="40"></textarea>
+            </div>
 
-			<br>
+            <br>
 
-			<div>
-				<button type="submit">登録する</button>
-				<button type="reset">リセット</button>
-			</div>
-		</form>
-	</main>
+            <div>
+                <button type="submit">更新する</button>
+                <a th:href="@{/books/{id}(id=${id})}">キャンセル</a>
+            </div>
+
+        </form>
+    </main>
+
 </body>
-
 </html>
