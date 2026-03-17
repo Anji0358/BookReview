@@ -29,7 +29,7 @@ public class Review {
     private Integer score;//評価
 
     @Column(columnDefinition = "TEXT")
-    private String comment;//レビュー本文
+    private String content;//レビュー本文
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")

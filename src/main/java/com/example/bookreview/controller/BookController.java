@@ -11,7 +11,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.bookreview.entity.Book;
 import com.example.bookreview.form.BookForm;
+import com.example.bookreview.form.ReviewForm;
 import com.example.bookreview.service.BookService;
+import com.example.bookreview.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class BookController {
 	
 	private final BookService bookService;
+	private final ReviewService reviewService;
 	
 	/**
 	 * 書籍一覧を表示する
@@ -40,7 +43,7 @@ public class BookController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") Long id,Model model) {
 		
-		// Serviceを使ってIDで検索
+		// IDで検索
 		Book book=bookService.findById(id);
 		
 		// 本が見つからない場合のハンドリング（任意）
@@ -49,7 +52,10 @@ public class BookController {
         }
         
         model.addAttribute("book", book);
+        
+        model.addAttribute("reviews", reviewService.findByBookId(id));
 		
+        model.addAttribute("reviewForm", new ReviewForm());
 		return "books/detail";
 	}
 	
