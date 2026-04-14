@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bookreview.entity.Book;
 import com.example.bookreview.repository.BookRepository;
@@ -22,6 +23,7 @@ public class BookService {
 	/**
      * 全ての書籍を取得します。
      */
+	@Transactional
 	public List<Book> findAll(){
 		
 		List<Book> allBooks=new ArrayList<>();
@@ -34,6 +36,7 @@ public class BookService {
      * IDを指定して書籍を1件取得します。
      * 見つからない場合は null を返すか、例外を投げます。
      */
+	@Transactional(readOnly=true)
 	public Book findById(Long id) {
 		return bookRepository.findById(id).orElse(null);
 	}
@@ -42,6 +45,7 @@ public class BookService {
      * 書籍を保存（新規登録・更新）します。
      * IDがあれば更新、なければ新規登録として動きます。
      */
+	@Transactional
 	public void save(Book book) {
 		bookRepository.save(book);
 	}
@@ -49,6 +53,7 @@ public class BookService {
 	/**
      * IDを指定して書籍を削除します。
      */
+	@Transactional
 	public void deleteById(Long id) {
 		bookRepository.deleteById(id);
 	}
