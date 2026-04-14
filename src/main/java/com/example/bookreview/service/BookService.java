@@ -31,16 +31,8 @@ public class BookService {
 
 		List<Book> allBooks = new ArrayList<>();
 
-		//キャッシュが機能しているかの確認
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
-
 		bookRepository.findAll().forEach(allBooks::add);
-		;
+		
 		return allBooks;
 	}
 
@@ -51,14 +43,6 @@ public class BookService {
 	@Transactional(readOnly = true)
 	@Cacheable(value = "getBook", key = "#p0")
 	public Book findById(Long id) {
-
-		//キャッシュが機能しているかの確認
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
 
 		return bookRepository.findById(id).orElse(null);
 	}
@@ -82,14 +66,6 @@ public class BookService {
 			@CacheEvict(value = "getBooks", allEntries = true)
 	})
 	public void deleteById(Long id) {
-
-		//キャッシュが機能しているかの確認
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
 
 		bookRepository.deleteById(id);
 	}
