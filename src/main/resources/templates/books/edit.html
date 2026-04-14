@@ -21,13 +21,15 @@
             <div>
                 <label for="title">タイトル:</label><br>
                 <input type="text" id="title" th:field="*{title}" required>
-            </div>
+				<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>    
+			</div>
 
             <br>
 
             <div>
                 <label for="author">著者:</label><br>
                 <input type="text" id="author" th:field="*{author}" required>
+				<div th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
             </div>
 
             <br>
@@ -35,6 +37,7 @@
             <div>
                 <label for="isbn">ISBN:</label><br>
                 <input type="text" id="isbn" th:field="*{isbn}">
+				<div th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></div>
             </div>
 
             <br>
@@ -42,6 +45,7 @@
             <div>
                 <label for="description">内容紹介:</label><br>
                 <textarea id="description" th:field="*{description}" rows="5" cols="40"></textarea>
+				<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             </div>
 
             <br>

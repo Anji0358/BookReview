@@ -2,6 +2,8 @@ package com.example.bookreview.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,9 +54,7 @@ public class BookController {
         }
         
         model.addAttribute("book", book);
-        
         model.addAttribute("reviews", reviewService.findByBookId(id));
-		
         model.addAttribute("reviewForm", new ReviewForm());
 		return "books/detail";
 	}
@@ -75,7 +75,14 @@ public class BookController {
 	 * 書籍を保存する
 	 */
 	@PostMapping("/register")
-	public String store(@ModelAttribute BookForm bookForm,RedirectAttributes redirectAttributes) {
+	public String store(@ModelAttribute @Validated BookForm bookForm,
+						BindingResult bindingResult,
+						RedirectAttributes redirectAttributes,
+						Model model) {
+		
+		if(bindingResult.hasErrors()) {
+			return "books/register";
+		}
 		
 		Book book = new Book();
         book.setTitle(bookForm.getTitle());
@@ -94,22 +101,19 @@ public class BookController {
      */
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model) {
-        // 1. IDを元に、現在DBに保存されている本の情報を取得する
+       
         Book book = bookService.findById(id);
         
-        // 2. 本が見つからない場合は一覧へリダイレクト（安全策）
         if (book == null) {
             return "redirect:/books";
         }
 
-        // 3. Entityの値をFormクラスに詰め替える（画面の入力欄に現在の値を表示するため）
         BookForm bookForm = new BookForm();
         bookForm.setTitle(book.getTitle());
         bookForm.setAuthor(book.getAuthor());
         bookForm.setIsbn(book.getIsbn());
         bookForm.setDescription(book.getDescription());
 
-        // 4. FormオブジェクトとIDをModelに渡す
         model.addAttribute("bookForm", bookForm);
         model.addAttribute("id", id); 
 
@@ -120,23 +124,28 @@ public class BookController {
      * 書籍情報を更新する
      */
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable("id") Long id, @ModelAttribute BookForm bookForm, RedirectAttributes redirectAttributes) {
-        // 1. 既存のデータを取得
+    public String update(@PathVariable("id") Long id,
+    					@ModelAttribute @Validated BookForm bookForm,
+    					BindingResult bindingResult,
+    					Model model,
+    					RedirectAttributes redirectAttributes) {
+    	
+    	if (bindingResult.hasErrors()) {
+            model.addAttribute("id", id);
+            return "books/edit";
+        }
+    	
         Book book = bookService.findById(id);
         
-        // 2. 画面から送られてきたFormの値で、Entityを上書きする
         book.setTitle(bookForm.getTitle());
         book.setAuthor(bookForm.getAuthor());
         book.setIsbn(bookForm.getIsbn());
         book.setDescription(bookForm.getDescription());
 
-        // 3. 保存を実行（IDがセットされているので、JPAが自動的にUPDATE文を発行します）
         bookService.save(book);
 
-        // 4. 完了メッセージを設定
         redirectAttributes.addFlashAttribute("successMessage", "書籍情報を更新しました");
 
-        // 5. 更新した本の詳細画面へリダイレクト
         return "redirect:/books/" + id;
     }
 }
