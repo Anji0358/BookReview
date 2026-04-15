@@ -18,10 +18,10 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showRegisterForm() {
-        return "auth/signupr";
+        return "auth/signup";
     }
 
-    @PostMapping("/signupr")
+    @PostMapping("/signup")
     public String register(@RequestParam String username,
                            @RequestParam String email,
                            @RequestParam String password,
@@ -31,7 +31,7 @@ public class UserController {
             return "redirect:/login";
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "auth/signupr";
+            return "auth/signup";
         }
     }
 
