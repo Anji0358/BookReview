@@ -1,3 +1,6 @@
+# URL
+* https://bookreview-43pt.onrender.com
+※初期の起動時には約一分ほどかかります。
 
 # BookReview　アプリ
 本の管理とレビュー投稿ができるWebアプリケーションです。
