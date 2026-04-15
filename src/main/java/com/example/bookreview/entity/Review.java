@@ -37,6 +37,10 @@ public class Review {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     // 保存前に日時を自動設定
     @PrePersist
