@@ -2,22 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>会員登録</title>
+    <title>ログイン</title>
 </head>
 <body>
-    <h1>会員登録</h1>
+    <h1>ログイン</h1>
 
-    <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div th:if="${param.error}">
+        ユーザー名またはパスワードが違います
+    </div>
 
-    <form th:action="@{/register}" method="post">
+    <div th:if="${param.logout}">
+        ログアウトしました
+    </div>
+
+    <form th:action="@{/login}" method="post">
         <div>
             <label>ユーザー名</label>
             <input type="text" name="username">
-        </div>
-
-        <div>
-            <label>メールアドレス</label>
-            <input type="email" name="email">
         </div>
 
         <div>
@@ -25,9 +26,9 @@
             <input type="password" name="password">
         </div>
 
-        <button type="submit">登録</button>
+        <button type="submit">ログイン</button>
     </form>
 
-    <a th:href="@{/login}">ログインはこちら</a>
+    <a th:href="@{/register}">新規登録はこちら</a>
 </body>
 </html>
