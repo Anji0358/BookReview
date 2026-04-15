@@ -16,12 +16,12 @@ public class UserController {
 	
 	private final UserService userService;
 
-    @GetMapping("/register")
+    @GetMapping("/signup")
     public String showRegisterForm() {
-        return "auth/register";
+        return "auth/signupr";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/signupr")
     public String register(@RequestParam String username,
                            @RequestParam String email,
                            @RequestParam String password,
@@ -31,7 +31,7 @@ public class UserController {
             return "redirect:/login";
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "auth/register";
+            return "auth/signupr";
         }
     }
 
