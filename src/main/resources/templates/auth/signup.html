@@ -9,20 +9,23 @@
 
     <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
-    <form th:action="@{/register}" method="post">
+    <form th:action="@{/signup}" th:object="${signupForm}" method="post">
         <div>
             <label>ユーザー名</label>
-            <input type="text" name="username">
+            <input type="text" th:field="*{username}">
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
         </div>
 
         <div>
             <label>メールアドレス</label>
-            <input type="email" name="email">
+            <input type="email" th:field="*{email}">
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
         </div>
 
         <div>
             <label>パスワード</label>
-            <input type="password" name="password">
+            <input type="password" th:field="*{password}">
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         </div>
 
         <button type="submit">登録</button>

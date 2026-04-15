@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bookreview.entity.User;
+import com.example.bookreview.form.SignupForm;
 import com.example.bookreview.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,19 +18,19 @@ public class UserService {
 	private final PasswordEncoder passwordEncoder;
 
 	 @Transactional
-	    public void register(String username, String email, String password) {
-	        if (userRepository.findByUsername(username).isPresent()) {
+	    public void signup(SignupForm signupForm) {
+	        if (userRepository.findByUsername(signupForm.getUsername()).isPresent()) {
 	            throw new IllegalArgumentException("このユーザー名はすでに使われています");
 	        }
 
-	        if (userRepository.findByEmail(email).isPresent()) {
+	        if (userRepository.findByEmail(signupForm.getEmail()).isPresent()) {
 	            throw new IllegalArgumentException("このメールアドレスはすでに使われています");
 	        }
 
 	        User user = new User();
-	        user.setUsername(username);
-	        user.setEmail(email);
-	        user.setPassword(passwordEncoder.encode(password));
+	        user.setUsername(signupForm.getUsername());
+	        user.setEmail(signupForm.getEmail());
+	        user.setPassword(passwordEncoder.encode(signupForm.getPassword()));
 	        user.setRole("ROLE_USER");
 
 	        userRepository.save(user);
