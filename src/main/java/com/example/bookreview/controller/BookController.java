@@ -45,10 +45,8 @@ public class BookController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") Long id,Model model) {
 		
-		// IDで検索
 		Book book=bookService.findById(id);
 		
-		// 本が見つからない場合のハンドリング（任意）
         if (book == null) {
             return "redirect:/books";
         }
