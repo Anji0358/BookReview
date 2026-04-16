@@ -4,11 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import com.example.bookreview.service.CustomUserDetailsService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	private final CustomUserDetailsService customUserDetailsService;
+	private final UserDetailsService userDetailsService;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -26,7 +25,7 @@ public class SecurityConfig {
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 	    DaoAuthenticationProvider authProvider =
-	            new DaoAuthenticationProvider(customUserDetailsService);
+	            new DaoAuthenticationProvider(userDetailsService);
 	    authProvider.setPasswordEncoder(passwordEncoder());
 	    return authProvider;
 	}
@@ -36,7 +35,7 @@ public class SecurityConfig {
 		http
 				.authenticationProvider(authenticationProvider())
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/", "/books", "/books/*", "/signup", "/login", "/css/**").permitAll()
+						.requestMatchers("/", "/books", "/books/**", "/signup", "/login", "/css/**").permitAll()
 						.requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.formLogin(form -> form
@@ -46,6 +45,7 @@ public class SecurityConfig {
 						.failureUrl("/login?error")
 						.permitAll())
 				.logout(logout -> logout
+						.logoutUrl("/logout")
 						.logoutSuccessUrl("/books")
 						.permitAll());
 
