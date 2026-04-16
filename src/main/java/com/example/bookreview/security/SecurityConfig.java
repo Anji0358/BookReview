@@ -1,4 +1,4 @@
-package com.example.bookreview.config;
+package com.example.bookreview.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
