@@ -1,21 +1,6 @@
 package com.example.bookreview.controller;
 
-import jakarta.validation.Valid;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import com.example.bookreview.entity.User;
-import com.example.bookreview.form.SignupForm;
-import com.example.bookreview.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
-
+/*
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
@@ -65,3 +50,4 @@ public class AuthController {
 		return "redirect:/login";
 	}
 }
+*/

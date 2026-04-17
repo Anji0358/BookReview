@@ -1,9 +1,6 @@
 package com.example.bookreview.security;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-
+/*
 public class LoginUser extends org.springframework.security.core.userdetails.User {
 
     private final com.example.bookreview.entity.User user;
@@ -19,3 +16,4 @@ public class LoginUser extends org.springframework.security.core.userdetails.Use
         return user;
     }
 }
+*/
