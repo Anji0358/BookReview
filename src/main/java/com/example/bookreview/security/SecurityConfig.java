@@ -34,6 +34,19 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	    http
+	        .csrf(csrf -> csrf.disable()) // セキュリティ保護を無効化
+	        .authorizeHttpRequests(auth -> auth
+	            .anyRequest().permitAll() // 全てのURLへのアクセスを許可
+	        );
+
+	    return http.build();
+	}
+	
+	
+	/*security導入前に戻す
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 				.authenticationProvider(authenticationProvider())
 				.authorizeHttpRequests(auth -> auth
@@ -58,4 +71,5 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+	*/
 }
