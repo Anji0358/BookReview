@@ -8,10 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="users")
 @Data
+@NoArgsConstructor
 public class User {
 
 	 @Id
@@ -29,4 +31,6 @@ public class User {
 
 	    @Column(nullable = false)
 	    private String role;
+	    
+	    
 }
