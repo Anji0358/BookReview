@@ -25,13 +25,13 @@ public class AuthController {
 
 	@GetMapping("/signin")
 	public String login() {
-		return "signin";
+		return "auth/signin";
 	}
 
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("signupForm", new SignupForm());
-		return "signup";
+		return "auth/signup";
 	}
 
 	@PostMapping("/signup")
@@ -41,17 +41,17 @@ public class AuthController {
 			Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "signup";
+			return "auth/signup";
 		}
 
 		if (userRepository.findByUsername(signupForm.getUsername()).isPresent()) {
 			model.addAttribute("errorMessage", "このユーザー名はすでに使われています");
-			return "signup";
+			return "auth/signup";
 		}
 
 		if (userRepository.findByEmail(signupForm.getEmail()).isPresent()) {
 			model.addAttribute("errorMessage", "このメールアドレスはすでに使われています");
-			return "signup";
+			return "auth/signup";
 		}
 
 		User user = new User();
