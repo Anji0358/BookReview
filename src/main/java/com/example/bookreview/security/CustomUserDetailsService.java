@@ -1,6 +1,18 @@
 package com.example.bookreview.security;
 
-/*
+import java.util.List;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.bookreview.entity.User;
+import com.example.bookreview.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
@@ -19,4 +31,3 @@ public class CustomUserDetailsService implements UserDetailsService {
         );
     }
 }
-*/

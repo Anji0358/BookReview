@@ -1,19 +1,10 @@
 package com.example.bookreview.controller;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class HomeController {
-
-    @GetMapping("/")
-    public String home() {
-        // ログイン判定を無視して、直接本のリストへ
-        return "redirect:/books";
-    }
-}
-
-/*
 @Controller
 public class HomeController {
 	
@@ -29,4 +20,3 @@ public class HomeController {
 	    return "redirect:/login";
 	}
 }
-*/
