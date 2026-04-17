@@ -28,7 +28,27 @@ public class SecurityConfig {
 		authProvider.setPasswordEncoder(passwordEncoder());
 		return authProvider;
 	}
+	
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	    http
+	        .authenticationProvider(authenticationProvider())
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers("/", "/signup", "/css/**").permitAll()
+	            .requestMatchers("/admin/**").hasRole("ADMIN")
+	            .anyRequest().authenticated())
+	        .formLogin(form -> form
+	            .defaultSuccessUrl("/books", true)
+	            .permitAll())
+	        .logout(logout -> logout
+	            .logoutUrl("/logout")
+	            .logoutSuccessUrl("/")
+	            .permitAll());
 
+	    return http.build();
+	}
+
+	/*
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
@@ -55,5 +75,5 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
-	
+	*/
 }
