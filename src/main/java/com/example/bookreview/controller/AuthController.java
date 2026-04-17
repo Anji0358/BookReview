@@ -23,9 +23,9 @@ public class AuthController {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 
-	@GetMapping("/login")
+	@GetMapping("/signin")
 	public String login() {
-		return "login";
+		return "signin";
 	}
 
 	@GetMapping("/signup")
@@ -62,6 +62,6 @@ public class AuthController {
 
 		userRepository.save(user);
 
-		return "redirect:/login";
+		return "redirect:/signin";
 	}
 }

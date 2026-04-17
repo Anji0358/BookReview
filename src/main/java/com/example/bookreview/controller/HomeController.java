@@ -17,6 +17,6 @@ public class HomeController {
 	    }
 
 	    // 未ログインならログイン画面へ
-	    return "redirect:/login";
+	    return "redirect:/signin";
 	}
 }

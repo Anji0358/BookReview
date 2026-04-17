@@ -31,42 +31,22 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http
-	        .authenticationProvider(authenticationProvider())
-	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers("/", "/signup", "/css/**").permitAll()
-	            .requestMatchers("/admin/**").hasRole("ADMIN")
-	            .anyRequest().authenticated())
-	        .formLogin(form -> form
-	            .defaultSuccessUrl("/books", true)
-	            .permitAll())
-	        .logout(logout -> logout
-	            .logoutUrl("/logout")
-	            .logoutSuccessUrl("/")
-	            .permitAll());
-
-	    return http.build();
-	}
-
-	/*
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 				.authenticationProvider(authenticationProvider())
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers(
 								"/",
 								"/signup",
-								"/login",
+								"/signin",
 								"/css/**"
 						).permitAll()
 						.requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.formLogin(form -> form
-						.loginPage("/login")
+						.loginPage("/signin")
 						.loginProcessingUrl("/perform_login")
 						.defaultSuccessUrl("/books", true)
-						.failureUrl("/login?error")
+						.failureUrl("/signin?error")
 						.permitAll())
 				.logout(logout -> logout
 						.logoutUrl("/logout")
@@ -75,5 +55,4 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
-	*/
 }
