@@ -38,6 +38,7 @@ public class SecurityConfig {
 				.authenticationProvider(authenticationProvider())
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers(
+								"/",
 								"/signup",
 								"/login",
 								"/css/**"
@@ -52,7 +53,7 @@ public class SecurityConfig {
 						.permitAll())
 				.logout(logout -> logout
 						.logoutUrl("/logout")
-						.logoutSuccessUrl("/books")
+						.logoutSuccessUrl("/")
 						.permitAll());
 
 		return http.build();
