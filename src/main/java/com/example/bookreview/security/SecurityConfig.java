@@ -1,5 +1,7 @@
 package com.example.bookreview.security;
 
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -29,7 +31,7 @@ public class SecurityConfig {
 	    authProvider.setPasswordEncoder(passwordEncoder());
 	    return authProvider;
 	}
-
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
