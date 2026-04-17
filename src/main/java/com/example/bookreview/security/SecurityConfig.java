@@ -44,7 +44,7 @@ public class SecurityConfig {
 						.anyRequest().authenticated())
 				.formLogin(form -> form
 						.loginPage("/login")
-						.loginProcessingUrl("/login")
+						.loginProcessingUrl("/perform_login")
 						.defaultSuccessUrl("/books", true)
 						.failureUrl("/login?error")
 						.permitAll())
