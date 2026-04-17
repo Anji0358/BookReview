@@ -21,13 +21,4 @@ public class HomeController {
         // ログイン済み
         return "redirect:/books";
     }
-    
-    @Controller
-    public class AuthController {
-
-        @GetMapping("/login")
-        public String login() {
-            return "login";
-        }
-    }
 }
