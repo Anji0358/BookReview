@@ -25,19 +25,23 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String reviewerName;//レビュー投稿者の名前
-    private Integer score;//評価
+    private String reviewerName; // レビュー投稿者の名前
+    private Integer score;       // 評価
 
     @Column(columnDefinition = "TEXT")
-    private String content;//レビュー本文
+    private String content;      // レビュー本文
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
-    private Book book;//レビューした本のId
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book; // レビューした本
 
+    // ★ ここを少し改善
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -45,10 +49,12 @@ public class Review {
     // 保存前に日時を自動設定
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
     }
 
+    // 更新前に日時を更新
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
