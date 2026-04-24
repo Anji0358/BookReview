@@ -1,6 +1,15 @@
 package com.example.bookreview.service;
 
-/*
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.bookreview.entity.User;
+import com.example.bookreview.form.SignupForm;
+import com.example.bookreview.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -22,9 +31,8 @@ public class UserService {
 	        user.setUsername(signupForm.getUsername());
 	        user.setEmail(signupForm.getEmail());
 	        user.setPassword(passwordEncoder.encode(signupForm.getPassword()));
-	        user.setRole("ROLE_USER");
+	        user.setRole("USER");
 
 	        userRepository.save(user);
 	    }
 }
-*/
