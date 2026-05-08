@@ -39,7 +39,7 @@
 					<td th:text="${book.id}">1</td>
 					<td th:text="${book.title}">タイトルが入ります</td>
 					<td th:text="${book.author}">著者が入ります</td>
-					<td th:text="${book.isbn}">ISBNが入ります</td>
+					<td th:text="${#temporals.format(book.publishedDate, 'yyyy/MM/dd')}">2000/01/01</td>
 					<td>
 						<a th:href="@{/books/{id}(id=${book.id})}">詳細</a>
 						<a th:href="@{/books/{id}/edit(id=${book.id})}">編集</a>

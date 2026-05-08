@@ -100,7 +100,7 @@ public class BookController {
 		Book book = new Book();
 		book.setTitle(bookForm.getTitle());
 		book.setAuthor(bookForm.getAuthor());
-		book.setIsbn(bookForm.getIsbn());
+		book.setPublishedDate(bookForm.getPublishedDate());
 		book.setDescription(bookForm.getDescription());
 
 		// ★ ここが重要
@@ -128,7 +128,7 @@ public class BookController {
 		BookForm bookForm = new BookForm();
 		bookForm.setTitle(book.getTitle());
 		bookForm.setAuthor(book.getAuthor());
-		bookForm.setIsbn(book.getIsbn());
+		bookForm.setPublishedDate(book.getPublishedDate());
 		bookForm.setDescription(book.getDescription());
 
 		model.addAttribute("bookForm", bookForm);
@@ -156,7 +156,7 @@ public class BookController {
 
 		book.setTitle(bookForm.getTitle());
 		book.setAuthor(bookForm.getAuthor());
-		book.setIsbn(bookForm.getIsbn());
+		book.setPublishedDate(bookForm.getPublishedDate());
 		book.setDescription(bookForm.getDescription());
 
 		bookService.save(book);

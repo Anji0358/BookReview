@@ -28,8 +28,8 @@
 					<td th:text="${book.author}">著者名</td>
 				</tr>
 				<tr>
-					<th>ISBN</th>
-					<td th:text="${book.isbn}">123-456</td>
+					<th>出版日</th>
+					<td th:text="${#temporals.format(book.publishedDate, 'yyyy/MM/dd')}">2000/01/01</td>
 				</tr>
 				<tr>
 					<th>登録日時</th>
@@ -40,81 +40,79 @@
 					<td th:text="${#temporals.format(book.updatedAt, 'yyyy/MM/dd HH:mm')}">2026/03/17</td>
 				</tr>
 			</table>
-			
+
 			<h3>内容紹介</h3>
-			            <p style="white-space: pre-wrap;" th:text="${book.description}">
-			                ここに本の説明文が表示されます。
-			            </p>
+			<p style="white-space: pre-wrap;" th:text="${book.description}">
+				ここに本の説明文が表示されます。
+			</p>
 
-			            <hr>
-			            <div class="actions">
-			                <a th:href="@{/books/{id}/edit(id=${book.id})}">この本を編集する</a>
-			                <br><br>
-			                <a th:href="@{/books/{id}/delete(id=${book.id})}" 
-			                   onclick="return confirm('本当に削除しますか？')">この本を削除する</a>
-			            </div>
+			<hr>
+			<div class="actions">
+				<a th:href="@{/books/{id}/edit(id=${book.id})}">この本を編集する</a>
+				<br><br>
+				<a th:href="@{/books/{id}/delete(id=${book.id})}" onclick="return confirm('本当に削除しますか？')">この本を削除する</a>
+			</div>
 		</section>
-		
+
 		<hr>
-		    
-		    <section>
-		        <h3>カスタマーレビュー</h3>
-		        <div th:if="${#lists.isEmpty(reviews)}">
-		            <p>まだレビューはありません。</p>
-		        </div>
-		        
-		        <div th:each="review : ${reviews}" style="border-bottom: 1px solid #ccc; margin-bottom: 10px;">
-		            <p>
-		                <strong>投稿者：<span th:text="${review.reviewerName}">なまえ</span></strong>
-		                <span>（評価：<span th:text="${review.score}">5</span>）</span>
-		            </p>
-		            <p th:text="${review.content}">レビュー内容がここに入ります。</p>
-		            <p style="font-size: 0.8em; color: gray;" th:text="${#temporals.format(review.createdAt, 'yyyy/MM/dd HH:mm')}"></p>
-					
-					<form	th:if="${loginUser != null and (review.user.id == loginUser.id or loginUser.role == 'ADMIN')}"
-							th:action="@{/reviews/{reviewId}/delete(reviewId=$})}"
-							method="post"
-							onsubmit="return confirm('個のレビューを削除しますか？');">
-							<button type="submit">削除</button>
-					</form>"
-					
-		        </div>
-		    </section>
 
-		    <hr>
+		<section>
+			<h3>カスタマーレビュー</h3>
+			<div th:if="${#lists.isEmpty(reviews)}">
+				<p>まだレビューはありません。</p>
+			</div>
 
-		    <section>
-		        <h3>レビューを投稿する</h3>
-		        <form th:action="@{/books/{bookId}/reviews(bookId=${book.id})}" th:object="${reviewForm}" method="post">
-		            <div>
-		                <label>お名前：</label><br>
-		                <input type="text" th:field="*{reviewerName}" required>
-		            </div>
-		            <br>
-		            <div>
-		                <label>評価：</label><br>
-		                <select th:field="*{score}">
-		                    <option value="5">5（非常に良い）</option>
-		                    <option value="4">4（良い）</option>
-		                    <option value="3">3（普通）</option>
-		                    <option value="2">2（悪い）</option>
-		                    <option value="1">1（非常に悪い）</option>
-		                </select>
-		            </div>
-		            <br>
-		            <div>
-		                <label>コメント：</label><br>
-		                <textarea th:field="*{content}" rows="4" cols="40" required></textarea>
-		            </div>
-		            <br>
-		            <button type="submit">レビューを送信</button>
-		        </form>
-		    </section>
-		
+			<div th:each="review : ${reviews}" style="border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+				<p>
+					<strong>投稿者：<span th:text="${review.reviewerName}">なまえ</span></strong>
+					<span>（評価：<span th:text="${review.score}">5</span>）</span>
+				</p>
+				<p th:text="${review.content}">レビュー内容がここに入ります。</p>
+				<p style="font-size: 0.8em; color: gray;"
+					th:text="${#temporals.format(review.createdAt, 'yyyy/MM/dd HH:mm')}"></p>
+
+				<form th:action="@{/books/{bookId}/reviews/{reviewId}/delete(bookId=${book.id}, reviewId=${review.id})}"
+					method="post" onsubmit="return confirm('このレビューを削除しますか？');">
+					<button type="submit">削除</button>
+				</form>
+
+			</div>
+		</section>
+
+		<hr>
+
+		<section>
+			<h3>レビューを投稿する</h3>
+			<form th:action="@{/books/{bookId}/reviews(bookId=${book.id})}" th:object="${reviewForm}" method="post">
+				<div>
+					<label>お名前：</label><br>
+					<input type="text" th:field="*{reviewerName}" required>
+				</div>
+				<br>
+				<div>
+					<label>評価：</label><br>
+					<select th:field="*{score}">
+						<option value="5">5（非常に良い）</option>
+						<option value="4">4（良い）</option>
+						<option value="3">3（普通）</option>
+						<option value="2">2（悪い）</option>
+						<option value="1">1（非常に悪い）</option>
+					</select>
+				</div>
+				<br>
+				<div>
+					<label>コメント：</label><br>
+					<textarea th:field="*{content}" rows="4" cols="40" required></textarea>
+				</div>
+				<br>
+				<button type="submit">レビューを送信</button>
+			</form>
+		</section>
+
 		<section th:if="${book == null}">
-		            <p>指定された書籍は見つかりませんでした。</p>
-		            <a th:href="@{/books}">一覧へ戻る</a>
-		        </section>
+			<p>指定された書籍は見つかりませんでした。</p>
+			<a th:href="@{/books}">一覧へ戻る</a>
+		</section>
 	</main>
 </body>
 

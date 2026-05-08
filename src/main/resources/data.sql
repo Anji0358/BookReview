@@ -11,65 +11,65 @@ VALUES
 -- 初期書籍データ
 -- =========================
 INSERT INTO books
-(id, title, author,isbn, description, created_at, updated_at, user_id)
+(id, title, author, published_date, description, created_at, updated_at, user_id)
 VALUES
-(1, 'Java基礎入門', 'サンプル著者A', '2000/01/01',
+(1, 'Java基礎入門', 'サンプル著者A', '2000-01-01',
  'Javaの基礎文法、制御構文、クラスの基本を体系的に学べる入門書です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
 
-(2, '実践Javaプログラミング', 'サンプル著者B', '2000/01/02',
+(2, '実践Javaプログラミング', 'サンプル著者B', '2000-01-02',
  'Javaを使った実践的なアプリケーション開発の考え方を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
 
-(3, 'Java設計パターン入門', 'サンプル著者C', '2000/01/03',
+(3, 'Java設計パターン入門', 'サンプル著者C', '2000-01-03',
  'オブジェクト指向設計や設計パターンの基本を、Javaの例を通して学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
 
-(4, '読みやすいコードの書き方', 'サンプル著者D', '2000/01/04',
+(4, '読みやすいコードの書き方', 'サンプル著者D', '2000-01-04',
  '保守しやすく読みやすいコードを書くための命名、分割、コメントの考え方を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2),
 
-(5, 'ソフトウェア開発の基本姿勢', 'サンプル著者E', '2000/01/05',
+(5, 'ソフトウェア開発の基本姿勢', 'サンプル著者E', '2000-01-05',
  '開発者として成長するための学習方法、設計姿勢、改善の考え方を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2),
 
-(6, 'リファクタリング実践入門', 'サンプル著者F', '2000/01/06',
+(6, 'リファクタリング実践入門', 'サンプル著者F', '2000-01-06',
  '既存コードを安全に改善し、可読性と保守性を高めるための基本を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2),
 
-(7, 'アーキテクチャ設計入門', 'サンプル著者G', '2000/01/07',
+(7, 'アーキテクチャ設計入門', 'サンプル著者G', '2000-01-07',
  'レイヤードアーキテクチャ、依存関係の整理、責務分離の考え方を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2),
 
-(8, 'Webアプリケーション基礎', 'サンプル著者H', '2000/01/08',
+(8, 'Webアプリケーション基礎', 'サンプル著者H', '2000-01-08',
  'HTTP、URL、リクエスト、レスポンスなど、Webアプリケーション開発の基礎を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3),
 
-(9, 'データベース設計入門', 'サンプル著者I', '2000/01/09',
+(9, 'データベース設計入門', 'サンプル著者I', '2000-01-09',
  'テーブル設計、主キー、外部キー、正規化など、データベース設計の基本を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3),
 
-(10, 'SQL実践トレーニング', 'サンプル著者J', '2000/01/10',
+(10, 'SQL実践トレーニング', 'サンプル著者J', '2000-01-10',
  'SELECT、JOIN、GROUP BY、サブクエリなど、SQLの実践的な使い方を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3),
 
-(11, 'Spring Boot入門', 'サンプル著者K', '2000/01/11',
+(11, 'Spring Boot入門', 'サンプル著者K', '2000-01-11',
  'Spring Bootを使ったWebアプリケーション開発の基本構成を学べる入門書です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
 
-(12, 'Spring Framework基礎', 'サンプル著者L', '2000/01/12',
+(12, 'Spring Framework基礎', 'サンプル著者L', '2000-01-12',
  'DI、MVC、データアクセス、サービス層の設計など、Springの基本を体系的に学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
 
-(13, 'Spring Boot実践開発', 'サンプル著者M', '2000/01/13',
+(13, 'Spring Boot実践開発', 'サンプル著者M', '2000-01-13',
  'Spring Bootを用いたCRUD、ログイン機能、データベース連携の実装を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2),
 
-(14, 'Git操作入門', 'サンプル著者N', '2000/01/14',
+(14, 'Git操作入門', 'サンプル著者N', '2000-01-14',
  'Gitの基本操作、コミット、ブランチ、マージ、リモートリポジトリの扱いを学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3),
 
-(15, 'システム運用とログ管理', 'サンプル著者O', '2000/01/15',
+(15, 'システム運用とログ管理', 'サンプル著者O', '2000-01-15',
  'Webアプリケーションの運用、ログ確認、エラー調査、監視の基本を学べる本です。',
  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3);
  -- =========================

@@ -1,5 +1,6 @@
 package com.example.bookreview.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -26,7 +27,9 @@ public class Book {
 
 	private String title;
 	private String author;
-	private String isbn;
+	
+	@Column(name = "published_date")
+	private LocalDate publishedDate;
 	private String description;
 
 	@Column(name = "created_at",updatable=false)

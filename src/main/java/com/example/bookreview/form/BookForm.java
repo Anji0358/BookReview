@@ -1,8 +1,11 @@
 package com.example.bookreview.form;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -18,8 +21,8 @@ public class BookForm {
 	private String author;
 
 	@NotBlank(message = "出版日を入力してください")
-	@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "出版日はYYYY-MM-DD形式で入力してください")
-	private String isbn;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private LocalDate publishedDate;
 
 	@NotBlank(message = "説明を入力してください")
 	@Size(max = 500, message = "説明は500文字以内で入力してください")
