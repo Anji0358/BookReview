@@ -3,9 +3,9 @@
 -- =========================
 INSERT INTO users (id, username, email, password, role)
 VALUES
-(1, 'admin', 'admin@example.com', '$2a$10$7EqJtq98hPqEX7fNZaFWoOhi4XUoI9qTg3pC6v3xZGg8mGxYwV2H2', 'ADMIN'),
-(2, 'taro', 'taro@example.com', '$2a$10$7EqJtq98hPqEX7fNZaFWoOhi4XUoI9qTg3pC6v3xZGg8mGxYwV2H2', 'USER'),
-(3, 'hanako', 'hanako@example.com', '$2a$10$7EqJtq98hPqEX7fNZaFWoOhi4XUoI9qTg3pC6v3xZGg8mGxYwV2H2', 'USER');
+(1, 'admin', 'admin@example.com', '$2a$10$PDGrBz5EMUah2MyikHma.ek3i9.ygo4CBmGHuqiaCoY6vthadwXKa', 'ADMIN'),
+(2, 'taro', 'taro@example.com', '$2a$10$PDGrBz5EMUah2MyikHma.ek3i9.ygo4CBmGHuqiaCoY6vthadwXKa', 'USER'),
+(3, 'hanako', 'hanako@example.com', '$2a$10$PDGrBz5EMUah2MyikHma.ek3i9.ygo4CBmGHuqiaCoY6vthadwXKa', 'USER');
 
 -- =========================
 -- 初期書籍データ
