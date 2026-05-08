@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bookreview.entity.Review;
+import com.example.bookreview.entity.User;
 import com.example.bookreview.repository.ReviewRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -41,8 +43,19 @@ public class ReviewService {
      */
 	@Transactional
 	@CacheEvict(value="getReviews",allEntries=true)
-    public void deleteById(Long id) {
-        reviewRepository.deleteById(id);
+    public void deleteById(Long reviewId,User loginUser) {
+		
+		Review review=reviewRepository.findById(reviewId)
+				.orElseThrow(() -> new IllegalArgumentException("レビューが見つかりません"));
+		
+		boolean isOwner =review.getUser().getId().equals(loginUser.getId());
+		boolean isAdmin ="ADMIN".equals(loginUser.getRole());
+		
+		if(!isOwner && !isAdmin) {
+			throw new AccessDeniedException("個のレビューを削除する権限がありません");
+		}
+		
+        reviewRepository.deleteById(reviewId);
     }
 }
 
