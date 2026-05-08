@@ -1,5 +1,7 @@
 package com.example.bookreview.controller;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.bookreview.entity.Book;
+import com.example.bookreview.entity.Review;
 import com.example.bookreview.form.BookForm;
 import com.example.bookreview.form.ReviewForm;
 import com.example.bookreview.security.LoginUser;
@@ -45,17 +48,26 @@ public class BookController {
 	 * @param id 書籍ID
 	 */
 	@GetMapping("/{id}")
-	public String show(@PathVariable("id") Long id, Model model) {
+	public String detail(
+			@PathVariable("id") Long id,
+			Model model,
+			@AuthenticationPrincipal LoginUser loginUser) {
 
 		Book book = bookService.findById(id);
+		List<Review> reviews=reviewService.findByBookId(id);
 
 		if (book == null) {
 			return "redirect:/books";
 		}
 
 		model.addAttribute("book", book);
-		model.addAttribute("reviews", reviewService.findByBookId(id));
+		model.addAttribute("reviews", reviews);
 		model.addAttribute("reviewForm", new ReviewForm());
+		
+		if (loginUser != null) {
+	        model.addAttribute("loginUser", loginUser.getUser());
+	    }
+		
 		return "books/detail";
 	}
 

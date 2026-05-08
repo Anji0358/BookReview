@@ -43,7 +43,7 @@ public class ReviewService {
      */
 	@Transactional
 	@CacheEvict(value="getReviews",allEntries=true)
-    public void deleteById(Long reviewId,User loginUser) {
+    public void deleteReview(Long reviewId,User loginUser) {
 		
 		Review review=reviewRepository.findById(reviewId)
 				.orElseThrow(() -> new IllegalArgumentException("レビューが見つかりません"));

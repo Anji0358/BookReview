@@ -70,6 +70,14 @@
 		            </p>
 		            <p th:text="${review.content}">レビュー内容がここに入ります。</p>
 		            <p style="font-size: 0.8em; color: gray;" th:text="${#temporals.format(review.createdAt, 'yyyy/MM/dd HH:mm')}"></p>
+					
+					<form	th:if="${loginUser != null and (review.user.id == loginUser.id or loginUser.role == 'ADMIN')}"
+							th:action="@{/reviews/{reviewId}/delete(reviewId=$})}"
+							method="post"
+							onsubmit="return confirm('個のレビューを削除しますか？');">
+							<button type="submit">削除</button>
+					</form>"
+					
 		        </div>
 		    </section>
 

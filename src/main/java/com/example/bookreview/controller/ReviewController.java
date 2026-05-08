@@ -1,5 +1,6 @@
 package com.example.bookreview.controller;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,8 +57,6 @@ public class ReviewController {
         review.setScore(reviewForm.getScore());
         review.setContent(reviewForm.getContent());
         review.setBook(book);
-
-        // これが今回必要
         review.setUser(loginUser.getUser());
 
         // 保存
@@ -66,6 +65,35 @@ public class ReviewController {
         redirectAttributes.addFlashAttribute("successMessage", "レビューを投稿しました");
 
         // 詳細画面へ戻る
+        return "redirect:/books/" + bookId;
+    }
+
+    /**
+     * レビューを削除する
+     * 投稿者本人または管理者のみ削除可能
+     */
+    @PostMapping("/{reviewId}/delete")
+    public String delete(
+            @PathVariable("bookId") Long bookId,
+            @PathVariable("reviewId") Long reviewId,
+            RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUser loginUser) {
+
+        // 未ログイン対策
+        if (loginUser == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "レビューを削除するにはログインが必要です");
+            return "redirect:/login";
+        }
+
+        try {
+            reviewService.deleteReview(reviewId, loginUser.getUser());
+            redirectAttributes.addFlashAttribute("successMessage", "レビューを削除しました");
+        } catch (AccessDeniedException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "このレビューを削除する権限がありません");
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "指定されたレビューが見つかりません");
+        }
+
         return "redirect:/books/" + bookId;
     }
 }
