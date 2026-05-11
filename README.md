@@ -1,47 +1,44 @@
-# URL
-* https://bookreview-43pt.onrender.com
-※初期の起動時には約一分ほどかかります。
+# BookReview
 
-# BookReview　アプリ
-本の管理とレビュー投稿ができるWebアプリケーションです。
+## 概要
 
-## スクリーンショット
-* ![alt text](images/image-3.png)
-
-### 新規登録
-* ![alt text](images/image-4.png)
-* ![alt text](images/image-5.png)
-* ![alt text](images/image-6.png)
-
-### 書籍詳細
-* ![alt text](images/image-7.png)
-* ![alt text](images/image-8.png)
-* ![alt text](images/image-9.png)
-
-### 書籍編集
-* ![alt text](images/image-10.png)
-* ![alt text](images/image-11.png)
-* ![alt text](images/image-12.png)
-
-## 機能一覧
-* 書籍の一覧表示・詳細閲覧
-* 新しい書籍の登録・既存情報の編集
-* 書籍に対するレビュー投稿機能（5段階評価とコメント）
+BookReview は、書籍の登録・レビュー投稿・閲覧ができる Web アプリケーションです。
+個人の読書記録だけでなく、複数ユーザーが本の感想を共有できるサービスを想定しています。
 
 ## 使用技術
-### バックエンド (Backend)
-- **Java**: 21 (最新の長期サポート版)
-- **Spring Boot**: 4.0.2
-    - **Spring MVC**: Webアプリケーション構築
-    - **Spring Data JPA**: データベース操作（ORM）
-    - **Spring Boot Validation**: 入力値のバリデーション
-- **Lombok**: アノテーションによるボイラープレートコードの削減
 
-### フロントエンド (Frontend)
-- **Thymeleaf**: テンプレートエンジンによる動的HTML生成
-- **HTML5 / CSS3**: UIデザイン
+- Java 21
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- Thymeleaf
+- H2 Database
+- PostgreSQL / Neon
+- Docker
+- Render
 
-### データベース / ツール (Database & Tools)
-- **H2 Database**: インメモリ型データベース（開発・テスト用）
-- **Maven**: プロジェクト管理・ビルドツール
-- **Spring Boot DevTools**: 開発中のオートリロード機能
+## 主な機能
+
+- 書籍一覧表示
+- 書籍詳細表示
+- 書籍登録・編集・削除
+- レビュー投稿
+- ユーザー登録
+- ログイン・ログアウト
+- 管理者権限による管理機能
+
+## 工夫した点
+
+- Controller / Service / Repository に責務を分けた
+- Spring Security による認証機能を実装した
+- 本番環境と開発環境で DB を切り替えられるようにした
+- Docker を用いてデプロイしやすい構成にした
+
+## 今後追加したい機能
+
+- 投稿者本人のみ編集・削除できる認可制御
+- レビューのお気に入り機能
+- キャッシュの活用
+- バリデーション強化
+- 管理者画面の拡充
